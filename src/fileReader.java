@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * Class for reading and scanning a text file
- * @author Charles Davis
+ * @author Charles Davis, Angel Ortiz, Ashton Hariston, Keiren Phillips
  */
 public class fileReader {
     private final File reader;
@@ -19,8 +19,7 @@ public class fileReader {
         return reader;
     }
 
-
-    public void searchWord(String target) throws FileNotFoundException {
+    public void searchWord() throws FileNotFoundException {
         Scanner scr = new Scanner(reader);
         String[] lines = scr.useDelimiter("\\A").next().split("\n");
         char[][] arr = new char[lines.length][];
@@ -37,6 +36,19 @@ public class fileReader {
             }
             System.out.println();
         }
-
     }
+
+    /**
+     * a method to check if the word is found!
+     * @return true or false if the word is found
+     */
+    public boolean wordFound() {
+        // check left right top bottom diagonal and return true or false if found
+        // edge case if length is longer then length of array. check for out of bounds
+        // exception
+
+
+        return false;
+    }
+
 }

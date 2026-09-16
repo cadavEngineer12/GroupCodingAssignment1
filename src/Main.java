@@ -13,7 +13,7 @@ public class Main {
         File file = new File("grid.txt");
         fileReader read = new fileReader(file);
         String word = "Hello";
-        read.searchWord(word);
+        read.searchWord();
 
     }
 }
