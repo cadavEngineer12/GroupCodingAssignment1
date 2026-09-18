@@ -23,13 +23,17 @@ public class fileReader {
         Scanner scr = new Scanner(reader);
         String[] lines = scr.useDelimiter("\\A").next().split("\n");
         char[][] arr = new char[lines.length][];
-        for (int x = 0; x < lines.length; x++) {
-            String[] name = lines[x].trim().split(" ");
-            arr[x] = new char[name.length];
-            for (int y = 0; y < name.length; y++) {
-                arr[x][y] = name[y].charAt(0);
+        for (int row = 0; row < lines.length; row++) {
+            String[] name = lines[row].trim().split(" ");
+            arr[row] = new char[name.length];
+            for (int column = 0; column < name.length; column++) {
+                arr[row][column] = name[column].charAt(0);
             }
         }
+
+        /*
+         *section is meant for printing out the 2D arrays
+         */
         for (int x = 0; x < arr.length; x++) {
             for (int y = 0; y < arr[x].length; y++) {
                 System.out.print(arr[x][y] + " ");
@@ -37,18 +41,4 @@ public class fileReader {
             System.out.println();
         }
     }
-
-    /**
-     * a method to check if the word is found!
-     * @return true or false if the word is found
-     */
-    public boolean wordFound() {
-        // check left right top bottom diagonal and return true or false if found
-        // edge case if length is longer then length of array. check for out of bounds
-        // exception
-
-
-        return false;
-    }
-
 }
