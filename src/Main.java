@@ -15,7 +15,7 @@ public class Main {
         fileReader read = new fileReader(file);
         System.out.println("Please enter the word you are looking for: ");
         String word = scr.nextLine();
-        read.searchWord();
+        read.displayCharArray(read.fileToCharArray());
 
     }
 }

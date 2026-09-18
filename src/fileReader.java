@@ -19,7 +19,13 @@ public class fileReader {
         return reader;
     }
 
-    public void searchWord() throws FileNotFoundException {
+    /**
+     * Converts the grid text file into a 2D char array
+     * @return returns a 2D char array (char[][])
+     * @throws FileNotFoundException If source is not found throw FileNotFoundException
+     * @author Charles Davis, Ashton Hairston
+     */
+    public char[][] fileToCharArray() throws FileNotFoundException {
         Scanner scr = new Scanner(reader);
         String[] lines = scr.useDelimiter("\\A").next().split("\n");
         char[][] arr = new char[lines.length][];
@@ -30,10 +36,15 @@ public class fileReader {
                 arr[row][column] = name[column].charAt(0);
             }
         }
+        return arr;
+    }
 
-        /*
-         *section is meant for printing out the 2D arrays
-         */
+    /**
+     * Method to display 2D char array
+     * @param arr (2D char array)
+     * @author Charles Davis, Ashton Hairston
+     */
+    public void displayCharArray(char[][] arr) {
         for (int x = 0; x < arr.length; x++) {
             for (int y = 0; y < arr[x].length; y++) {
                 System.out.print(arr[x][y] + " ");
@@ -41,4 +52,13 @@ public class fileReader {
             System.out.println();
         }
     }
+
+    /*public boolean isTargetInArray(String target, char[][] arr) {
+        char[] targetArr = target.toCharArray();
+        int targetIndex = 0;
+
+        }
+    }
+
+     */
 }
