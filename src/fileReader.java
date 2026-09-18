@@ -53,12 +53,26 @@ public class fileReader {
         }
     }
 
-    /*public boolean isTargetInArray(String target, char[][] arr) {
+    public boolean isTargetInArray(String target, char[][] arr) {
         char[] targetArr = target.toCharArray();
-        int targetIndex = 0;
 
+        for(int row = 0; row < arr.length; row++){
+            for(int col = 0; col < arr[row].length; col++){
+                //this boolean expression uses some math to make sure
+                //there is enough space for the string to be there
+                //if the amount of space left isnt enough space to fight the string
+                //it will check the next position around our current element in a clockwise fasion
+              if(((arr.length - row) - target.length() >= 0)){
+                  //call wordSearch method here
+              }
+            }
         }
+        return false;
     }
 
-     */
+    /*
+    private boolean wordSearch
+            (int row, int col, int shiftRow, int shiftCol, char[] targetArr, char[][] arr){
+
+    } */
 }
