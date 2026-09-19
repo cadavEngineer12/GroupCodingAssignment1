@@ -21,9 +21,10 @@ public class fileReader {
 
     /**
      * Converts the grid text file into a 2D char array
+     * @author Charles Davis, Ashton Hairston
+     *
      * @return returns a 2D char array (char[][])
      * @throws FileNotFoundException If source is not found throw FileNotFoundException
-     * @author Charles Davis, Ashton Hairston
      */
     public char[][] fileToCharArray() throws FileNotFoundException {
         Scanner scr = new Scanner(reader);
@@ -41,8 +42,9 @@ public class fileReader {
 
     /**
      * Method to display 2D char array
+     *@author Charles Davis, Ashton Hairston
+     *
      * @param arr (2D char array)
-     * @author Charles Davis, Ashton Hairston
      */
     public void displayCharArray(char[][] arr) {
         for (int x = 0; x < arr.length; x++) {
@@ -53,26 +55,85 @@ public class fileReader {
         }
     }
 
+    /**
+     * Searches 2D array for target string
+     * @param target The word that is being searched for.
+     * @param arr The array we are searching through
+     * @return boolean: true if target is found, false otherwise
+     */
     public boolean isTargetInArray(String target, char[][] arr) {
         char[] targetArr = target.toCharArray();
+        boolean answer = false;
 
-        for(int row = 0; row < arr.length; row++){
-            for(int col = 0; col < arr[row].length; col++){
-                //this boolean expression uses some math to make sure
-                //there is enough space for the string to be there
-                //if the amount of space left isnt enough space to fight the string
-                //it will check the next position around our current element in a clockwise fasion
-              if(((arr.length - row) - target.length() >= 0)){
-                  //call wordSearch method here
-              }
+        for (int row = 0; row < arr.length; row++) {
+            for (int col = 0; col < arr[row].length; col++) {
+                //loop though each pos of the char[][].
+                //if we find a char in the 2D arr that matches the first char of target
+                //call wordSearch and check every direction around the current pos
+                if(arr[row][col] == targetArr[0]) {
+                    //search right
+                    answer = wordSearch(row, col, 1, 0, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] && answer != true) {
+                    //search bottom right
+                    answer = wordSearch(row, col, 1, 1, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] && answer != true) {
+                    //search bottom
+                    answer = wordSearch(row, col, 0, 1, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] && answer != true) {
+                    //search bottom left
+                    answer = wordSearch(row, col, -1, 1, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] && answer != true) {
+                    //search left
+                    answer = wordSearch(row, col, -1, 0, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] && answer != true) {
+                    //search top left
+                    answer = wordSearch(row, col, -1, -1, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] && answer != true) {
+                    //search top
+                    answer = wordSearch(row, col, 0, -1, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] && answer != true) {
+                    //search top right
+                    answer = wordSearch(row, col, 1, -1, targetArr, arr);
+                }
             }
         }
-        return false;
+        return answer;
     }
 
-    /*
+    /**
+     * This method takes in a 2D char array, a target char[], the location of the 2D array
+     * you wish to start at, and the direction you wish to search. It converts the string into
+     * an array and then compares the element of starting location and the first element
+     * of the "String" you are searching for.
+     * @author Ashton Hairston
+     *
+     * @param row Row number that we want to start our search on
+     * @param col Column number that we want to start our search on
+     * @param shiftRow The amount that row will shift each iteration of the loop
+     * @param shiftCol The amount that col will shift each iteration of the loop
+     * @param targetString The char[] that is the word you want to search for
+     * @param arr The 2D char array (char[][]) that we are searching through
+     * @return Returns true if the word is found, returns false if not.
+     */
     private boolean wordSearch
-            (int row, int col, int shiftRow, int shiftCol, char[] targetArr, char[][] arr){
-
-    } */
+            (int row, int col, int shiftRow, int shiftCol, char[] targetString, char[][] arr) {
+        int targetIndex = 0;
+        while (row < arr.length && col < arr[row].length && targetIndex < targetString.length
+                && row >= 0 && col >= 0) {
+            if (arr[row][col] != targetString[targetIndex]) {
+                return false;
+            }
+            row += shiftRow;
+            col += shiftCol;
+            targetIndex++;
+        }
+        return true;
+    }
 }

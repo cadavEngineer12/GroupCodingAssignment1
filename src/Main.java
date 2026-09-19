@@ -13,9 +13,11 @@ public class Main {
         Scanner scr = new Scanner(System.in);
         File file = new File("grid.txt");
         fileReader read = new fileReader(file);
-        System.out.println("Please enter the word you are looking for: ");
-        String word = scr.nextLine();
+        System.out.println("This is the grid: ");
         read.displayCharArray(read.fileToCharArray());
-
+        System.out.println();
+        System.out.println("Please enter the word you are looking for. (Case Sensitive)");
+        String word = scr.nextLine();
+        System.out.println(read.isTargetInArray(word, read.fileToCharArray()));
     }
 }
