@@ -74,31 +74,31 @@ public class fileReader {
                     //search right
                     answer = wordSearch(row, col, 1, 0, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && answer != true) {
+                if(arr[row][col] == targetArr[0] && !answer) {
                     //search bottom right
                     answer = wordSearch(row, col, 1, 1, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && answer != true) {
+                if(arr[row][col] == targetArr[0] && !answer) {
                     //search bottom
                     answer = wordSearch(row, col, 0, 1, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && answer != true) {
+                if(arr[row][col] == targetArr[0] && !answer) {
                     //search bottom left
                     answer = wordSearch(row, col, -1, 1, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && answer != true) {
+                if(arr[row][col] == targetArr[0] && !answer) {
                     //search left
                     answer = wordSearch(row, col, -1, 0, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && answer != true) {
+                if(arr[row][col] == targetArr[0] && !answer) {
                     //search top left
                     answer = wordSearch(row, col, -1, -1, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && answer != true) {
+                if(arr[row][col] == targetArr[0] && !answer) {
                     //search top
                     answer = wordSearch(row, col, 0, -1, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && answer != true) {
+                if(arr[row][col] == targetArr[0] && !answer) {
                     //search top right
                     answer = wordSearch(row, col, 1, -1, targetArr, arr);
                 }
@@ -125,8 +125,8 @@ public class fileReader {
     private boolean wordSearch
             (int row, int col, int shiftRow, int shiftCol, char[] targetString, char[][] arr) {
         int targetIndex = 0;
-        while (row < arr.length && col < arr[row].length && targetIndex < targetString.length
-                && row >= 0 && col >= 0) {
+        while (row >= 0 && row < arr.length && col < arr[row].length && targetIndex < targetString.length
+                 && col >= 0) {
             if (arr[row][col] != targetString[targetIndex]) {
                 return false;
             }

@@ -16,8 +16,8 @@ public class Main {
         System.out.println("This is the grid: ");
         read.displayCharArray(read.fileToCharArray());
         System.out.println();
-        System.out.println("Please enter the word you are looking for. (Case Sensitive)");
+        System.out.println("Please enter the word you are looking for.");
         String word = scr.nextLine();
-        System.out.println(read.isTargetInArray(word, read.fileToCharArray()));
+        System.out.println(read.isTargetInArray(word.toUpperCase(), read.fileToCharArray()));
     }
 }
