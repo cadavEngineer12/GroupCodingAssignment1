@@ -134,6 +134,6 @@ public class fileReader {
             col += shiftCol;
             targetIndex++;
         }
-        return true;
+        return (targetIndex == targetString.length);
     }
 }
