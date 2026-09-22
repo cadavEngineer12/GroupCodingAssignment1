@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -15,9 +14,6 @@ public class fileReader {
         this.reader = reader;
     }
 
-    public File getFile(File reader) {
-        return reader;
-    }
 
     /**
      * Converts the grid text file into a 2D char array
@@ -34,16 +30,19 @@ public class fileReader {
             String[] name = lines[row].trim().split(" ");
             arr[row] = new char[name.length];
             for (int column = 0; column < name.length; column++) {
+                if(name[column].isEmpty()) {
+                    continue;
+                } // Just in case it is empty
                 arr[row][column] = name[column].charAt(0);
             }
         }
+        scr.close();
         return arr;
     }
 
     /**
      * Method to display 2D char array
      *@author Charles Davis, Ashton Hairston
-     *
      * @param arr (2D char array)
      */
     public void displayCharArray(char[][] arr) {
@@ -62,46 +61,46 @@ public class fileReader {
      * @return boolean: true if target is found, false otherwise
      */
     public boolean isTargetInArray(String target, char[][] arr) {
-        char[] targetArr = target.toCharArray();
+        char[] targetArr = target.toUpperCase().toCharArray(); // <-- CHANGED: upper here so Main doesn't have to do it
         boolean answer = false;
 
         for (int row = 0; row < arr.length; row++) {
             for (int col = 0; col < arr[row].length; col++) {
-                //loop though each pos of the char[][].
-                //if we find a char in the 2D arr that matches the first char of target
-                //call wordSearch and check every direction around the current pos
                 if(arr[row][col] == targetArr[0]) {
-                    //search right
-                    answer = wordSearch(row, col, 1, 0, targetArr, arr);
-                }
-                if(arr[row][col] == targetArr[0] && !answer) {
-                    //search bottom right
-                    answer = wordSearch(row, col, 1, 1, targetArr, arr);
-                }
-                if(arr[row][col] == targetArr[0] && !answer) {
-                    //search bottom
+                    //right
                     answer = wordSearch(row, col, 0, 1, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && !answer) {
-                    //search bottom left
-                    answer = wordSearch(row, col, -1, 1, targetArr, arr);
+                if(arr[row][col] == targetArr[0] &&!answer) {
+                    // bottom-right
+                    answer = wordSearch(row, col, 1, 1, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && !answer) {
-                    //search left
-                    answer = wordSearch(row, col, -1, 0, targetArr, arr);
+                if(arr[row][col] == targetArr[0] &&!answer) {
+                    // bottom
+                    answer = wordSearch(row, col, 1, 0, targetArr, arr);
                 }
-                if(arr[row][col] == targetArr[0] && !answer) {
-                    //search top left
-                    answer = wordSearch(row, col, -1, -1, targetArr, arr);
-                }
-                if(arr[row][col] == targetArr[0] && !answer) {
-                    //search top
-                    answer = wordSearch(row, col, 0, -1, targetArr, arr);
-                }
-                if(arr[row][col] == targetArr[0] && !answer) {
-                    //search top right
+                if(arr[row][col] == targetArr[0] &&!answer) {
+                    // bottom-left
                     answer = wordSearch(row, col, 1, -1, targetArr, arr);
                 }
+                if(arr[row][col] == targetArr[0] &&!answer) {
+                    // left
+                    answer = wordSearch(row, col, 0, -1, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] &&!answer) {
+                    // top-left
+                    answer = wordSearch(row, col, -1, -1, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] &&!answer) {
+                    // top
+                    answer = wordSearch(row, col, -1, 0, targetArr, arr);
+                }
+                if(arr[row][col] == targetArr[0] &&!answer) {
+                    // top-right
+                    answer = wordSearch(row, col, -1, 1, targetArr, arr);
+                }
+                if(answer) {
+                    return true;
+                };
             }
         }
         return answer;
@@ -123,11 +122,11 @@ public class fileReader {
      * @return Returns true if the word is found, returns false if not.
      */
     private boolean wordSearch
-            (int row, int col, int shiftRow, int shiftCol, char[] targetString, char[][] arr) {
+    (int row, int col, int shiftRow, int shiftCol, char[] targetString, char[][] arr) {
         int targetIndex = 0;
-        while (row >= 0 && row < arr.length && col < arr[row].length && targetIndex < targetString.length
-                 && col >= 0) {
-            if (arr[row][col] != targetString[targetIndex]) {
+
+        while (row >= 0 && col >= 0 && row < arr.length && col < arr[row].length && targetIndex < targetString.length) {
+            if (arr[row][col]!= targetString[targetIndex]) {
                 return false;
             }
             row += shiftRow;

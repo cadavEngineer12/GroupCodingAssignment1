@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.Scanner;
 
 /**
@@ -13,11 +12,11 @@ public class Main {
         Scanner scr = new Scanner(System.in);
         File file = new File("grid.txt");
         fileReader read = new fileReader(file);
-        System.out.println("This is the grid: ");
-        read.displayCharArray(read.fileToCharArray());
-        System.out.println();
-        System.out.println("Please enter the word you are looking for.");
+        char[][] grid = read.fileToCharArray();
+        read.displayCharArray(grid);
+        System.out.println("\nPlease enter the word you are looking for:");
         String word = scr.nextLine();
-        System.out.println(read.isTargetInArray(word.toUpperCase(), read.fileToCharArray()));
+        System.out.println(read.isTargetInArray(word, grid));
+
     }
 }
