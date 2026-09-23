@@ -17,6 +17,6 @@ public class Main {
         System.out.println("\nPlease enter the word you are looking for:");
         String word = scr.nextLine();
         System.out.println(read.isTargetInArray(word, grid));
-
+        scr.close();
     }
 }
